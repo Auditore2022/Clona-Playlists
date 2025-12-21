@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.log
+
+# Entornos virtuales
+venv/
+.env/
+.env.* 
+
+# Spotipy cache
+.cache
+
+# Config locales
+*.sqlite3
+*.db
+
+# Archivos sensibles
+.env
+*.pem
+*.p8
