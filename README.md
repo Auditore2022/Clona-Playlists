@@ -18,8 +18,8 @@ Script en python para clonar una lista de canciones (artista - título) de un ar
 - crear un archivo "songs.txt" con las canciones que quiere añadir a la lista en el siguiente formato:
     Artista - Título
 Por ejemplo:
-    Luis Miguel - Hasta Que Me Olvides
-    BURNOUT SYNDROMES - FLY HIGH!!
+    - Luis Miguel - Hasta Que Me Olvides
+    - BURNOUT SYNDROMES - FLY HIGH!!
 
 ## Uso
 
