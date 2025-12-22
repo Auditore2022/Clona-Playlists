@@ -57,14 +57,28 @@ def read_songs_file(path: str) -> List[Tuple[str, str]]:
     return songs
     
 def search_track(sp: spotipy.Spotify, artist: str, title: str):
-    """busca un track en spotify usando artista + títutlo"""
-    query = f"track:{title} artist:{artist}"
-    result = sp.search(q=query, type="track", limit=1)
-    items = result.get("tracks", {}).get("items", [])
+    """
+    Busca un track en Spotify usando dos métodos:
+    1. Búsqueda estricta con qualifiers (track: / artist:)
+    2. Búsqueda flexible sin qualifiers
+    """
 
+    #1. Búsqueda estricta
+    query_strict = f"track:{title} artist:{artist}"
+    result = sp.search(q=query_strict, type="track", limit=1)
+    items = result.get("tracks", {}).get("items", [])
+    if items:
+        return items[0]
+    
+    #2. Búsqueda flexible (hasta 3 resultados)
+    query_flexible = f"{title} {artist}"
+    result = sp.search(q=query_flexible, type="track", limit=3)
+    items = result.get("tracks", {}).get("items", [])
     if not items:
         return None
-    return items[0] #primer resultado
+    
+    #por ahora, devolvemos el primero de los resultados
+    return items[0]
 
 def create_playlist(sp: spotipy.Spotify, username: str, name: str, description: str = "") -> str:
     """Crea un playlist y devuelve su ID"""

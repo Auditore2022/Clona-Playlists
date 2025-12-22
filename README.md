@@ -1,4 +1,4 @@
-# Clonador de Playlist 0.1(CLI)
+# Clonador de Playlist 0.1.0(CLI)
 
 Script en python para clonar una lista de canciones (artista - título) de un archivo ".txt" a una playlist de Spotify
 
@@ -35,3 +35,6 @@ Por ejemplo:
     3. el total de canciones NO encontradas en Spotify
     4. la lista de canciones que NO encontró en Spotify
 
+## Versiones
+
+- v0.1.0 - Primera versión CLI usable: lectura desde "songs.txt", creación de playlist en Spotify y matchin básico mejorado.
