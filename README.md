@@ -34,6 +34,17 @@ Por ejemplo:
     2. el total de canciones encontradas en Spotify
     3. el total de canciones NO encontradas en Spotify
     4. la lista de canciones que NO encontró en Spotify
+  
+  ejemplo:
+    === Resumen ===
+    Total en archivo: 696
+    Encontradas en Spotify: 695
+    No encontradas: 1
+
+    Canciones no encontradas:
+    - Eros Ramazzotti - Así (feat. Il Volo)
+
+    Listo. Revisa tu cuenta de Spotify para ver la nueva playlist.
 
 ## Versiones
 
