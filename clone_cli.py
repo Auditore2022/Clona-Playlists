@@ -1,5 +1,7 @@
 import os
 from typing import List, Tuple
+from models import Track
+from services.apple_service import get_tracks_from_apple_playlist
 from services.spotify_service import (
     load_env,
     init_spotify,
@@ -10,31 +12,33 @@ from services.spotify_service import (
 
 def read_songs_file(path: str) -> List[Tuple[str, str]]:
     """
-    lee un archivo de texto con formato:
-    Artista - Tìtulo
-    
-    Devuelve una lista de tuplas (artista, tìtulo)
-    
-    """
-    songs:List[Tuple[str, str]] = []
+    Lee un archivo de texto con el siguiente formato:
+    Artista - Título
 
-    with open(path, "r", encoding = "utf-8") as f:
+    y devuelve una lista de objetos de clase Track
+    """
+    songs: List[Track] = []
+
+    with open(path, "r", encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if not line:
                 continue
             #separar por " - "
-            parts = line.split(" - ", maxsplit=1)
+            parts=line.split(" - ", maxsplit=1)
             if len(parts) != 2:
-                print(f"[ADVERTENCIA] Línea inválida (se ignorará): {line}")
+                print(f"[ADVERTENCIA] Línea inválida, se ignorará: {line}")
                 continue
             artist, title = parts[0].strip(), parts[1].strip()
-            songs.append((artist, title))
-
+            track = Track(artist=artist, title=title)
+            songs.append(track)
     return songs
-    
+
 def main():
     print("=== Playlist Cloner (versión CLI) ===")
+    print(" 1) Archivo 'songs.txt'")
+    print(" 2) Apple Music (simulado)")
+    choice = input ("Opción [1/2]: ").strip() or "1"
 
     #1. Cargar configuración
     client_id, client_secret, redirect_uri, username = load_env()
@@ -45,17 +49,33 @@ def main():
     me = sp.current_user()
     print(f"Autenticado como: {me['display_name']} ({me['id']})")
 
-    #3. leer archivo de canciones
-    songs_file = "songs.txt"
-    if not os.path.exists(songs_file):
-        print(f"No se encontró el archivo {songs_file}. Créalo y agrega 'Artista - Título' por línea.")
-        return
-    songs = read_songs_file(songs_file)
-    if not songs:
-        print("No se encontraron cancionas válidad en el archivo")
-        return
+    #3. Obtener canciones según la fuente elegida
+    if choice== "1":
+        songs_file = "songs.txt"
+        if not os.path.exists(songs_file):
+            print(f"No se encontró el archivo {songs_file}. Créalo y agrega tus canciones en formato 'Artista - Título' por línea")
+            return
+        
+        songs = read_songs_file(songs_file)
+        if not songs:
+            print("No se encontraron canciones válidas en el archivo.")
+            return
+        
+        print(f"Se leyeron {len(songs)} canciones desde {songs_file}")
     
-    print(f"→ Se leyeron {len(songs)} canciones desde {songs_file}")
+    elif choice == "2":
+        #TODO: en el futuro se leerá una URL real de Apple Music
+        fake_url = "https://music.apple.com/mx/playlist/demo"
+        songs = get_tracks_from_apple_playlist(fake_url)
+        if not songs:
+            print("No se obtuvieron canciones desde Apple Music (simulado).")
+            return
+        
+        print(f"Se obtuvieron {len(songs)} canciones desde Apple Music (simulado).")
+
+    else:
+        print("Opción inválida. Usa 1 o 2.")
+        return
 
     #4. preguntar nombre de la playlist destino
     playlist_name = input("Nombre de la nueva playlist en Spotify: ").strip() or "Mi playlist clonada"
@@ -65,9 +85,9 @@ def main():
     not_found: List[Tuple[str, str]] = []
 
     print("\n=== Buscando canciones en Spotify ===")
-    for idx, (artist, title) in enumerate(songs, start=1):
-        print(f"[{idx}/{len(songs)}] Buscando: {artist} - {title}...", end=" ", flush=True)
-        track = search_track(sp, artist, title)
+    for idx, song in enumerate(songs, start=1):
+        print(f"[{idx}/{len(songs)}]Buscando: {song} ...", end=" ", flush=True)
+        track = search_track(sp, song.artist, song.title)
         if track:
             track_id = track["id"]
             found_track_ids.append(track_id)
