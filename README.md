@@ -27,11 +27,11 @@ Por ejemplo:
 - ejecutar comando "python clone_cli.py"
 - se abrirá el navegador para iniciar sesión en tu cuenta de spotify
 - después de iniciar sesión, el programa te pedirá elegir tres opciones:
-    - 1) leer desde un archivo de texto "songs.txt" (uso típico)
+    1) leer desde un archivo de texto "songs.txt" (uso típico)
         - al usar la opción 1, el programa leerá el archvio "songs.txt" y buscará las canciones en Spotify
-    - 2) leer desde una lista de Apple Music
+    2) leer desde una lista de Apple Music
         - NO DISPONIBLE POR EL MOMENTO
-    - 3) leer desde un enlace a una lista de reproducción de Deezer
+    3) leer desde un enlace a una lista de reproducción de Deezer
         - al usar la opción 3, el programa solicitará que ingreses la URL de una lista de reproducción de Deezer, la cual leerá y buscará las canciones en Spotify.
 - después se te pedirá que ingreses un nombre para la lista de reproducción (por defecto se pondrá "Creada con clonador de Playlist")
 - El programa creará automáticamente la Playlist con el nombre que elegiste, te mostrará la ID de la playlist, y comenzará a ingresar las canciones que haya encontrado en la plataforma
@@ -44,6 +44,7 @@ Por ejemplo:
   ejemplo:
   - 
     === Resumen ===
+   
     Total en archivo: 696
     Encontradas en Spotify: 695
     No encontradas: 1
