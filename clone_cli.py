@@ -2,6 +2,7 @@ import os
 from typing import List, Tuple
 from models import Track
 from services.apple_service import get_tracks_from_apple_playlist
+from services.deezer_service import get_tracks_from_deezer_playlist
 from services.spotify_service import (
     load_env,
     init_spotify,
@@ -36,9 +37,11 @@ def read_songs_file(path: str) -> List[Tuple[str, str]]:
 
 def main():
     print("=== Playlist Cloner (versión CLI) ===")
+    print("Selecciona la fuente de canciones: ")
     print(" 1) Archivo 'songs.txt'")
     print(" 2) Apple Music (simulado)")
-    choice = input ("Opción [1/2]: ").strip() or "1"
+    print(" 3) Deezer (URL pública)")
+    choice = input ("Opción [1/2/3]: ").strip() or "1"
 
     #1. Cargar configuración
     client_id, client_secret, redirect_uri, username = load_env()
@@ -72,9 +75,23 @@ def main():
             return
         
         print(f"Se obtuvieron {len(songs)} canciones desde Apple Music (simulado).")
+    
+    elif choice == "3":
+        deezer_url = input("Pega la URL de la playlist de Deezer: ").strip()
+        if not deezer_url:
+            print("Error: URL vacía. Intenta de nuevo")
+            return
+        
+        print("\n→ Obteniendo canciondes desde Deezer...")
+        songs = get_tracks_from_deezer_playlist(deezer_url)
+        if not songs:
+            print("No se obtuvieron canciones desde Deezer. Verifica la URL.")
+            return
+        
+        print(f"→ Se obtuvieron {len(songs)} canciones desde Deezer")
 
     else:
-        print("Opción inválida. Usa 1 o 2.")
+        print("Opción inválida. Usa 1, 2 o 3.")
         return
 
     #4. preguntar nombre de la playlist destino
