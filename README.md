@@ -1,4 +1,4 @@
-# Clonador de Playlist 0.1.0(CLI)
+# Clonador de Playlist 0.1.1(CLI)
 
 Script en python para clonar una lista de canciones (artista - título) de un archivo ".txt" a una playlist de Spotify
 
@@ -26,7 +26,10 @@ Por ejemplo:
 - asegurate de haber ingresado previamente los valores necesarios en el archivo ".env" y la lista de canciones en "songs.txt"
 - ejecutar comando "python clone_cli.py"
 - se abrirá el navegador para iniciar sesión en tu cuenta de spotify
-- después de iniciar sesión, el programa leerá el archvio "songs.txt" y buscará las canciones en Spotify
+- después de iniciar sesión, el programa te pedirá elegir dos opciones:
+    - 1) leer desde un archivo de texto "songs.txt" (uso típico)
+    - 2) leer desde una lista de Apple Music (OPCIÓN NO DISPONIBLE POR EL MOMENTO)
+- al usar la opción 1, el programa leerá el archvio "songs.txt" y buscará las canciones en Spotify
 - después se te pedirá que ingreses un nombre para la lista de reproducción (por defecto se pondrá "Creada con clonador de Playlist")
 - El programa creará automáticamente la Playlist con el nombre que elegiste, te mostrará la ID de la playlist, y comenzará a ingresar las canciones que haya encontrado en la plataforma
 - Al finalizar, te dará un resumen con
@@ -36,6 +39,7 @@ Por ejemplo:
     4. la lista de canciones que NO encontró en Spotify
   
   ejemplo:
+  - 
     === Resumen ===
     Total en archivo: 696
     Encontradas en Spotify: 695
@@ -48,4 +52,13 @@ Por ejemplo:
 
 ## Versiones
 
-- v0.1.0 - Primera versión CLI usable: lectura desde "songs.txt", creación de playlist en Spotify y matchin básico mejorado.
+### v0.1.1 (Actual)
+- Se implementó el objeto 'Track' como modelo de búsqueda sin importar la plataforma.
+- Integración básica con Spotify web API funcional.
+- Se reorganizó la lógica de Spotify, separandola en su propio archivo (services/spotify_service.py).
+- Se añadió esqueleto para 'services/apple_service.py', solo funciona en modo simulado.
+- Se añadió soporte para seleccionar fuente (archivo o Apple Music simulado).
+- **En desarrollo** Integración real con la API de Apple Music
+
+### v0.1.0
+- Primera versión CLI usable: lectura desde "songs.txt", creación de playlist en Spotify y matchin básico mejorado.
