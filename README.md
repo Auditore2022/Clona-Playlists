@@ -1,6 +1,6 @@
-# Clonador de Playlist 0.2.0(CLI)
+# Clonador de Playlist 0.2.1(CLI)
 
-Script en python para clonar una lista de canciones a una playlist de Spotify, ya sea desde un archivo de texto, o desde un servicio de música alterno (Deezer -disponible- o Apple Music -pendiente-)
+Script en python para clonar una lista de canciones a una playlist de Spotify, ya sea desde un archivo de texto, o desde un servicio de música alterno (Deezer, Youtube Music o Apple Music (este último pendiente de implementar))
 
 ## Requisitos
 
@@ -26,13 +26,15 @@ Por ejemplo:
 - asegurate de haber ingresado previamente los valores necesarios en el archivo ".env" y en su caso, la lista de canciones en "songs.txt"
 - ejecutar comando "python clone_cli.py"
 - se abrirá el navegador para iniciar sesión en tu cuenta de spotify
-- después de iniciar sesión, el programa te pedirá elegir tres opciones:
+- después de iniciar sesión, el programa te pedirá elegir entre cuatro opciones:
     1) leer desde un archivo de texto "songs.txt" (uso típico)
         - al usar la opción 1, el programa leerá el archvio "songs.txt" y buscará las canciones en Spotify
     2) leer desde una lista de Apple Music
         - NO DISPONIBLE POR EL MOMENTO
     3) leer desde un enlace a una lista de reproducción de Deezer
-        - al usar la opción 3, el programa solicitará que ingreses la URL de una lista de reproducción de Deezer, la cual leerá y buscará las canciones en Spotify.
+        - al usar la opción 3, el programa solicitará que ingreses la URL de una lista de reproducción pública de Deezer, la cual leerá y buscará las canciones en Spotify.
+    4) leer desde un enlace a una lista de reproducción de Youtube Music
+        - al usar la opción 4, el programa solicitará que ingreses la URL de una lista de reproducción pública de Youtube Music, la cual leerá y buscará las canciones en Spotify.
 - después se te pedirá que ingreses un nombre para la lista de reproducción (por defecto se pondrá "Creada con clonador de Playlist")
 - El programa creará automáticamente la Playlist con el nombre que elegiste, te mostrará la ID de la playlist, y comenzará a ingresar las canciones que haya encontrado en la plataforma
 - Al finalizar, te dará un resumen con
@@ -54,10 +56,22 @@ Por ejemplo:
 
     Listo. Revisa tu cuenta de Spotify para ver la nueva playlist.
 
+## Limitaciones conocidas
+
+- **YouTube Music**: Solo soporta playlists públicas. Las playlists privadas o generadas automáticamente (como "Mi Mix") no funcionan sin autenticación adicional (pendiente de implementar).
+- **Apple Music**: Requiere credenciales de Apple Developer ($99/año, no tengo dinero por ahora xD) para integración real. Por ahora está en modo simulado.
+- **Bidireccionalidad**: Por ahora solo se puede clonar A Spotify. Próximamente soporte para múltiples destinos.
+
 ## Versiones
 
+### v0.2.1
+- Integración completa con Youtube Music (Búsqueda + Playlists públicas)
+- Soporte para 4 fuentes: archivo, Apple (simulado), Deezer, YouTube Music.
+- CLI completamente flexible: cualquier origen → Spotify (por ahora).
+-  **Limitación conocida:** YouTube Music solo funciona con playlists públicas.
+
 ### v0.2.0
-- Integración completa con Deezer (Búsqueda + Playlist)
+- Integración completa con Deezer (Búsqueda + Playlists)
 - Clonación Deezer → Spotify funcional
 - CLI con soporte para 3 fuentes: archivo txt, Apple Music (simulado), Deezer
 

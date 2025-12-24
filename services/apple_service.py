@@ -70,4 +70,4 @@ def get_tracks_from_apple_playlist(playlist_url: str) -> List[Track]:
     Usar API real en un futuro
     """
     client = AppleMusicClient()
-    return client.get_tracks_from_apple_playlist(playlist_url)
+    return client.get_tracks_from_playlist(playlist_url)
