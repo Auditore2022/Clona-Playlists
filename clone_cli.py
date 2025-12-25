@@ -138,7 +138,7 @@ def main():
     print("\n=== Buscando canciones en Spotify ===")
     for idx, song in enumerate(songs, start=1):
         print(f"[{idx}/{len(songs)}] Buscando: {song} ...", end=" ", flush=True)
-        track = search_track(sp, song.artist, song.title)
+        track = search_track(sp, song.artist, song.title, song.duration_ms)
         if track:
             track_id = track["id"]
             found_track_ids.append(track_id)
