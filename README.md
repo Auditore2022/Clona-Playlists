@@ -63,6 +63,11 @@ Por ejemplo:
 - **Bidireccionalidad**: Por ahora solo se puede clonar A Spotify. Próximamente soporte para múltiples destinos.
 
 ## Versiones
+### v0.2.2 (Actual)
+- Fuzzy matching inteligente con fuzzywuzzy.
+- Por ende, se tienen ahora tres estrategias de búsqueda (estricta, flexible y fuzzy).
+- Manejo mejorado de artistas colaboradores.
+- Tasa de éxito: 94% → 100% en pruebas.
 
 ### v0.2.1
 - Integración completa con Youtube Music (Búsqueda + Playlists públicas)
