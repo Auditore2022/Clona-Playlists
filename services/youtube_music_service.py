@@ -146,6 +146,47 @@ class YoutubeMusicClient:
                 pass
         return None
 
+def create_playlist_in_youtube_music(playlist_name: str, playlist_description: str = "") -> str:
+    """
+    Crea una nueva playlist en Youtube Music.
+    
+    IMPORTANTE: Esto requiere que el usuario esté autenticado con su cuenta de Google / Youtube.
+    por ahora, esto es un placeholder que genera un ID simulado.
+    """
+
+    print(f"(YoutubeMusicClient) Creación de playlist requiere autenticación de Google")
+    print(f"Por ahora, se devuelve un playlist ID simulado")
+
+    #simulación: generar un ID fake de Youtube Music
+    import uuid
+    fake_playlist_id = str(uuid.uuid4())[:12]
+
+    print(f"Playlist '{playlist_name}' creada (simulado)")
+    print(f"ID: {fake_playlist_id}")
+
+    return fake_playlist_id
+
+
+def add_tracks_to_youtube_music_playlist(playlist_id: str, tracks: List[Track]) -> dict:
+    """
+    Intenta agregar tracks a una playlist de Youtube Music.
+
+    IMPORTANTE: Esto también requiere autenticación.
+    Por ahora solo es simulado.
+    """
+    print(f"(YoutubeMusicClient) Agregando {len(tracks)} canciones a playlist (simulado)")
+
+    #simulación
+    successfully_added = len(tracks) #asumir que todas se agregan
+    print(f"{successfully_added} canciones agregadas a Youtube Music (simulado)")
+
+    return {
+        "playlist_id": playlist_id,
+        "added": successfully_added,
+        "failed": 0
+    }
+
+
 def get_tracks_from_youtube_music_playlist(playlist_url: str) -> List[Track]:
     """
     Función de alto nivel usada por el CLI.

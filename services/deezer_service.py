@@ -104,7 +104,49 @@ class DeezerClient:
         except Exception:
             pass
         return None
-    
+   
+def create_playlist_in_deezer(playlist_name: str, playlist_description: str = "") -> str:
+    """
+    Crea una nueva playlist en Deezer.
+
+    IMPORTANTE: se requiere que el usuario inicie sesión en Deezer.
+    Por ahora esto generará un ID simulado.
+
+    En el futuro se usará la API de Deezer con OAuth.
+    """
+    print(f"(DeezerClient) Creación de playlists requiere de autenticación en la plataforma")
+    print(f" por ahora, se devuelve una playlist ID simulada")
+
+    #simulación: generar un ID fake de Deezer:
+    import uuid
+    fake_playlist_id = str(uuid.uuid4())[:12]
+
+    print(f"Playlist '{playlist_name}' creada (simulado)")
+    print(f"ID: {fake_playlist_id}")
+
+    return fake_playlist_id
+
+def add_tracks_to_deezer_playlist(playlist_id: str, tracks: List[Track]) -> dict:
+    """
+    Intenta agregar tracks a una playlist de Deezer.
+
+    Importante: Esto también requiere autenticación.
+    Por ahora es simulado.
+    """
+
+    print(f"(Deezerclient) Agregando {len(tracks)} canciones a playlist(simulado)")
+
+    #simulación
+    succesfully_added = len(tracks) #asumir que todas se agregan
+    print(f"{succesfully_added} canciones agregadas a Deezer ( simulado)")
+
+    return {
+        "Playlist_id": playlist_id,
+        "added": succesfully_added,
+        "failed": 0
+    }
+
+
 def get_tracks_from_deezer_playlist(playlist_url: str) -> List[Track]:
      """
      Función de alto nivel usada por el CLI.
